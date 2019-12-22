@@ -22,13 +22,13 @@ jobs:
         password: ${{ secrets.REGISTRY_PASSWORD }}
     
     - run: |
-        docker build . -t contoso.azurecr.io/sampleapp:${{ github.sha }}
-        docker push contoso.azurecr.io/sampleapp:${{ github.sha }} 
+        docker build . -t docker.pkg.github.com/simple-hyper-router:${{ github.sha }}
+        docker push docker.pkg.github.com/simple-hyper-router:${{ github.sha }} 
       
     - uses: azure/webapps-container-deploy@v1
       with:
-        app-name: 'sampleapp'
-        images: 'contoso.azurecr.io/sampleapp:${{ github.sha }}'
+        app-name: 'simple-hyper-router'
+        images: 'docker.pkg.github.com/simple-hyper-router:${{ github.sha }}'
     
     - name: Azure logout
       run: |
