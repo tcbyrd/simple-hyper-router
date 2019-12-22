@@ -10,6 +10,7 @@ async fn request_router(_req: Request<Body>) -> Result<Response<Body>, Infallibl
     for header in _req.headers().keys() {
         let header_name = header.as_str();
         let header_value = _req.headers().get(header).unwrap();
+        // header_value doesn't have a formatter, so we use {:#?} to force a pretty print version
         let header_string = format!("{}: {:#?}\n", header_name, header_value);
         response_body.push_str(&header_string);
     }
@@ -18,6 +19,7 @@ async fn request_router(_req: Request<Body>) -> Result<Response<Body>, Infallibl
     let path_string = format!("Path: {} \n", &path);
     response_body.push_str(&path_string);
     
+    // unwrap_or_default ensures an empty query string doesn't panic
     let query = _req.uri().query().unwrap_or_default();
     let query_string = format!("Query: {} \n", &query);
     response_body.push_str(&query_string);
