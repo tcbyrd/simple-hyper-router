@@ -37,7 +37,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let server = Server::bind(&addr).serve(router_svc);
 
-    println!("Running server on http://{}!", addr);
+    println!("Running server on http://{}!!", addr);
     
     server.await?;
 
