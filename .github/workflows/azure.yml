@@ -1,4 +1,6 @@
-on: [deployment]
+on:
+  pull_request:
+    tags: release
 
 name: Linux_Container_Deploy
 
