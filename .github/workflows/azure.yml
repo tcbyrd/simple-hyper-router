@@ -1,0 +1,7 @@
+on: [deployment]
+jobs:
+  deploy-to-app-service:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: Azure/webapps-deploy@v1
+        name: Azure App Deloy
