@@ -1,3 +1,4 @@
+# This will only kick off inside a PR so we can use deployments and PR comments
 on: [pull_request]
 
 name: Linux_Container_Deploy
@@ -20,10 +21,8 @@ jobs:
         login-server: tcbyrd.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
-    
-    - run: |
-        docker build . -t tcbyrd.azurecr.io/simple-hyper-router:${{ github.sha }}
-        docker push tcbyrd.azurecr.io/simple-hyper-router:${{ github.sha }} 
+      
+    - run: script/deploy
       
     - uses: azure/webapps-container-deploy@v1
       with:
