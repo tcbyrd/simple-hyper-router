@@ -1,0 +1,11 @@
+version: '3.6'
+services:
+  simple-hyper-router:
+    build:
+      context: "."
+      dockerfile: Dockerfile
+    ports:
+    - target: 3000
+      published: 3000
+      protocol: tcp
+    image: simple-hyper-router

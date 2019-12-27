@@ -1,9 +1,8 @@
-FROM rustlang/rust:nightly AS build
-COPY . ./
-RUN cargo build --release
-
-FROM scratch
-COPY --from=build ./target/release/simple-hyper-router /
-ENV PORT 3000
-EXPOSE ${PORT}
-CMD ["/simple-hyper-router"]
+FROM rustlang/rust:nightly
+WORKDIR /data/simple-hyper-router
+COPY . .
+RUN ["cargo", "build", "--release"]
+RUN ["cp", "./target/release/simple-hyper-router", "/bin/"]
+RUN ["chmod", "+x", "/bin/simple-hyper-router"]
+EXPOSE 3000
+CMD ["/bin/simple-hyper-router"]
