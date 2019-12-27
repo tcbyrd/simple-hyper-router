@@ -8,7 +8,7 @@ use hyper::service::{make_service_fn, service_fn};
 // the request URI, and any query arguments
 async fn request_router(_req: Request<Body>) -> Result<Response<Body>, Infallible> {
     let deployed_sha = env::var("DEPLOYED_SHA").unwrap_or_default();
-    let mut response_body = String::from("Request from Rust-Hyper:\n----------------\n");
+    let mut response_body = String::from("Request from Rust-Hyper:\n---------------------------------------------\n");
     let deployed_sha_string = format!("SHA: {}\n", &deployed_sha);
     response_body.push_str(&deployed_sha_string);
     for header in _req.headers().keys() {
