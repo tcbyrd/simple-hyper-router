@@ -22,7 +22,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
       
-      run: script/deploy ${{ github.sha }}
+    - run: script/deploy ${{ github.sha }}
       
     - uses: azure/webapps-container-deploy@v1
       with:
