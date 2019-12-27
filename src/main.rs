@@ -29,7 +29,7 @@ async fn request_router(_req: Request<Body>) -> Result<Response<Body>, Infallibl
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
 
     let router_svc = make_service_fn(|_conn| async {
         Ok::<_, Infallible>(service_fn(request_router))
