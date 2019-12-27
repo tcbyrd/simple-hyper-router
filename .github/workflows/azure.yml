@@ -22,7 +22,8 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
       
-    - run: script/deploy
+    - name: Build and push docker image
+      run: script/deploy ${{ github.sha }}
       
     - uses: azure/webapps-container-deploy@v1
       with:
