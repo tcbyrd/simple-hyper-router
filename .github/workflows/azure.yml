@@ -22,13 +22,21 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
       
-    - run: script/deploy
+    - name: Build and push container
+      run: script/deploy
       
     - uses: azure/webapps-container-deploy@v1
       with:
         app-name: 'simple-hyper-router'
         images: 'tcbyrd.azurecr.io/simple-hyper-router:${{ github.sha }}'
-    
+
+    - name: Set DEPLOYED_SHA variable to latest commit
+      run: /
+        az webapp config appsettings set
+         --name simple-hyper-router
+         --resource-group tcbyrd-probot
+         --settings DEPLOYED_SHA=${{ github.sha }}
+
     - name: Azure logout
       run: |
         az logout
