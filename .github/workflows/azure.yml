@@ -17,18 +17,18 @@ jobs:
     
     - uses: azure/docker-login@v1
       with:
-        login-server: docker.pkg.github.com
+        login-server: tcbyrd.azurecr.io
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     
     - run: |
-        docker build . -t docker.pkg.github.com/${{ secrets.REGISTRY_USERNAME }}/simple-hyper-router/simple-hyper-router:${{ github.sha }}
-        docker push docker.pkg.github.com/${{ secrets.REGISTRY_USERNAME }}/simple-hyper-router/simple-hyper-router:${{ github.sha }} 
+        docker build . -t tcbyrd.azurecr.io/simple-hyper-router:${{ github.sha }}
+        docker push tcbyrd.azurecr.io/simple-hyper-router:${{ github.sha }} 
       
     - uses: azure/webapps-container-deploy@v1
       with:
         app-name: 'simple-hyper-router'
-        images: 'docker.pkg.github.com/${{ secrets.REGISTRY_USERNAME }}/simple-hyper-router/simple-hyper-router:${{ github.sha }}'
+        images: 'tcbyrd.azurecr.io/simple-hyper-router:${{ github.sha }}'
     
     - name: Azure logout
       run: |
