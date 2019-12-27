@@ -1,0 +1,18 @@
+#!/bin/bash
+#Usage: script/deploy <sha>
+
+SHA=$1
+
+echo "Deployment has started for: $SHA"
+
+echo "Building new image"
+docker build . -t tcbyrd.azurecr.io/simple-hyper-router:$SHA
+
+echo "Build is complete and container is being pushed to ACR"
+docker push tcbyrd.azurecr.io/simple-hyper-router:$sha 
+
+echo "Push was successful. Waiting to see latest branch in production"
+
+# We'll do something more fancy here, but for now it should be live in ~30 seconds
+sleep 30
+echo "New branch is live now: $SHA"
